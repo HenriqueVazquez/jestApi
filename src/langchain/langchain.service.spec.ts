@@ -26,12 +26,6 @@ describe('LangchainService', () => {
       googleApiModel: 'gemini-2.0-flash',
       googleApiTemperature: 0.5,
       jwtSecret: 'changeme',
-      langsmith: {
-        tracing: false,
-        apiKey: undefined,
-        callbacksBackground: true,
-        project: 'nestjs-saas-study',
-      },
     };
 
     const module: TestingModule = await Test.createTestingModule({

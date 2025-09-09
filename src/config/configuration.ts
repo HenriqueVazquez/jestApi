@@ -13,11 +13,6 @@ export default registerAs('appLangChain', () => {
     googleApiTemperature: parseFloat(process.env.GOOGLE_API_TEMPERATURE || '0'),
     jwtSecret: process.env.JWT_SECRET || 'changeme',
 
-    langsmith: {
-      tracing: process.env.LANGSMITH_TRACING === 'true',
-      apiKey: process.env.LANGSMITH_API_KEY,
-      callbacksBackground: process.env.LANGCHAIN_CALLBACKS_BACKGROUND === 'true',
-      project: process.env.LANGCHAIN_PROJECT || 'nestjs-saas-study',
-    },
+
   };
 });

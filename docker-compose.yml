@@ -25,7 +25,6 @@ services:
     command: npm run start:dev
     volumes:
       - .:/usr/src/app:cached
-      - /usr/src/app/node_modules
 
 volumes:
   mongo_data:
