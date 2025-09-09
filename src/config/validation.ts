@@ -4,6 +4,8 @@ export const validationSchema = Joi.object({
   PORT: Joi.number().default(3000),
   MONGO_URI: Joi.string().required(),
   GOOGLE_API_KEY: Joi.string().required(),
+  GOOGLE_API_MODEL: Joi.string().required().default('gemini-2.0-flash'),
+  GOOGLE_API_TEMPERATURE: Joi.number().min(0).max(2).default(0),
   // JWT_SECRET: Joi.string().min(10).required(),
 
   LANGSMITH_TRACING: Joi.boolean().default(false),

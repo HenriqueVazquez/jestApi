@@ -1,17 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { BaseMessageLike } from '@langchain/core/messages';
-import { ConfigService } from '@nestjs/config';
+import type { ConfigType } from '@nestjs/config';
+import appLangChainConfig from '../config/configuration';
 
 @Injectable()
 export class LangchainService {
   private model: ChatGoogleGenerativeAI;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    @Inject(appLangChainConfig.KEY)
+    private configService: ConfigType<typeof appLangChainConfig>
+  ) {
     this.model = new ChatGoogleGenerativeAI({
-      model: 'gemini-2.0-flash',
-      temperature: 0,
-      apiKey: this.configService.get<string>('googleApiKey'),
+      model: this.configService.googleApiModel,
+      temperature: this.configService.googleApiTemperature,
+      apiKey: this.configService.googleApiKey,
     });
   }
 
