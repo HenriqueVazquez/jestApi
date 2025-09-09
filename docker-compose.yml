@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: saas_mongo
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
+    volumes:
+      - mongo_data:/data/db
+
+  app:
+    build: .
+    container_name: saas_app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    env_file:
+      - .env.docker
+    environment:
+      - DOCKER=true
+    command: npm run start:dev
+    volumes:
+      - .:/usr/src/app:cached
+      - /usr/src/app/node_modules
+
+volumes:
+  mongo_data:
